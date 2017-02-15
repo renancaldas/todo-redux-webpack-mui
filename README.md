@@ -1,6 +1,8 @@
 # Todo App
 
-### An app made for training purposes.
+### An todo app done for training purposes.
+
+[![](https://raw.githubusercontent.com/renancaldas/todo-redux-webpack-mui/master/screen.png)]()
 
 ### Technologies:
 - [Webpack](https://webpack.js.org/)
