@@ -1,6 +1,6 @@
 # Todo App
 
-### An todo app done for training purposes.
+### A todo app done for training purposes: Redux, React, Webpack and Material UI
 
 Live demo: https://renancaldas.github.io/todo-redux-webpack-mui/
 [![](https://raw.githubusercontent.com/renancaldas/todo-redux-webpack-mui/master/screen.png)]()
