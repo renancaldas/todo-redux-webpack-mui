@@ -7,10 +7,12 @@ const DEV_SERVER_URL = 'http://localhost:8080';
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
 const PRODUCTION = process.env.NODE_ENV === 'production'
 
+console.log('Building for: ', PRODUCTION ? 'PRODUCTION' : 'DEVELOPMENT');
+
 var entry = PRODUCTION
-    ? ['./src/App.js']
+    ? ['./src/App.jsx']
     : [
-        './src/App.js',
+        './src/App.jsx',
         'webpack/hot/dev-server',
         'webpack-dev-server/client?' + DEV_SERVER_URL
       ]
@@ -18,9 +20,10 @@ var entry = PRODUCTION
 var plugins = PRODUCTION
     ? [
         new webpack.optimize.UglifyJsPlugin(),
-        new HTMLWebpackPlugin({ template: 'index.html' })
+        new HTMLWebpackPlugin({ template: 'index-template.html' })
       ]
     : [
+        new HTMLWebpackPlugin({ template: 'index.html' }),
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({ url: DEV_SERVER_URL })
       ]
@@ -37,10 +40,14 @@ plugins.push(
 module.exports = {
     devtool: 'source-map', // to see the actual es6 code in chrome dev tools
     entry: entry,
-    plugins: plugins,
+    output: {
+        path: path.join(__dirname, 'dist'),
+        publicPath: PRODUCTION ? '/' : '/dist/',
+        filename: PRODUCTION ? 'bundle.[hash:12].min.js' : 'bundle.js'
+    },
     module: {
         loaders: [{
-            test: /\.js$/, // every js file will be transpiled
+            test: /\.jsx?$/, // every js file will be transpiled
             loaders: ['babel-loader'],
             exclude: '/node_modules'
         }, {
@@ -49,9 +56,8 @@ module.exports = {
             exclude: '/node_modules'
         }]
     },
-    output: {
-        path: path.join(__dirname, 'dist'),
-        publicPath: PRODUCTION ? '' : '/dist/',
-        filename: PRODUCTION ? 'bundle.[hash:12].min.js' : 'bundle.js'
-    }
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
+    plugins: plugins
 }

@@ -10,6 +10,7 @@ Live demo: https://renancaldas.github.io/todo-redux-webpack-mui/
 - [React](https://facebook.github.io/react/)
 - [Redux](https://github.com/reactjs/redux)
 - [Material-UI](http://www.material-ui.com)
+- [ESLint AirBnB](https://github.com/airbnb/javascript)
 
 ### Running the app:
 
